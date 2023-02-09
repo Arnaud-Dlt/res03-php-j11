@@ -1,7 +1,7 @@
 <?php
 
-class UserController{
-    
+class UserController extends AbstractController{
+    private UserManager $manager;
     
     public function __construct(){
         
@@ -9,14 +9,14 @@ class UserController{
     
     
     public function index(){
+        $views="users";
+    }
+    
+    public function create(array $post){
         
     }
     
-    public function create(){
-        
-    }
-    
-    public function edit(){
+    public function edit(array $post){
         
     }
 }
