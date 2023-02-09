@@ -1,6 +1,6 @@
 <?php
 
-abstract class UserController{
+abstract class AbstractController{
     
     
     public function __construct(){
@@ -10,8 +10,8 @@ abstract class UserController{
     
     public function render(string $view, array $values) : void
     {
-        $template = "$view";
-        $data = "$values";
+        $template = $view;
+        $data = $values;
         require 'views/layout.phtml';
     }
     

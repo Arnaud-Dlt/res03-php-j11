@@ -1,17 +1,13 @@
 <?php
 
+require 'managers/AbstractManager.php';
+require 'models/User.php';
+
 class UserManager extends AbstractManager{
-    
-    
-    public function __construct(){
-        
-    }
-    
     
     public function getAllUsers() : array
     {
-        $this->db=$db;
-        $query=$db->prepare("SELECT * FROM users");
+        $query=$this->db->prepare("SELECT * FROM users");
         $query->execute();
         $getAllUsers=$query->fetchAll(PDO::FETCH_ASSOC);
     
@@ -24,8 +20,7 @@ class UserManager extends AbstractManager{
     }
     public function getUserById(int $id) : User
     {
-        $this->db=$db;
-        $query=$db->prepare("SELECT * FROM users WHERE id= :id");
+        $query=$this->db->prepare("SELECT * FROM users WHERE id= :id");
         $parameters= ['id' => $id];
         $query->execute($parameters);
         $getUserById=$query->fetch(PDO::FETCH_ASSOC);
@@ -35,8 +30,7 @@ class UserManager extends AbstractManager{
     }
     public function insertUser(User $user) : User
     {
-        $this->db=$db;
-        $query=$db->prepare("INSERT INTO users VALUES (null, :email, :username,:password)");
+        $query=$this->db->prepare("INSERT INTO users VALUES (null, :email, :username,:password)");
         $parameters= [
             'email'=> $user->getEmail(),
             'username' =>$user->getUsername(),
@@ -50,8 +44,7 @@ class UserManager extends AbstractManager{
     }
     public function editUser(User $user) : void
     {
-        $this->db=$db;
-        $query=$db->prepare("UPDATE users SET email = :email, username=:username, password=:password WHERE users.id=:id");
+        $query=$this->db->prepare("UPDATE users SET email = :email, username=:username, password=:password WHERE users.id=:id");
         $parameters= [
             'id' => $user->getId(),
             'email'=> $user->getEmail(),
@@ -61,7 +54,6 @@ class UserManager extends AbstractManager{
         $query->execute($parameters);
         $allUsers=$query->fetch(PDO::FETCH_ASSOC);
     }
-    
 }
 
 

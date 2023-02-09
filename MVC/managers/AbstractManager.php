@@ -8,27 +8,19 @@ abstract class AbstractManager{
     private string $username;
     private string $password;
     
-    public function __construct(string $dbName,string $port,string $host,string $username,$password){
-        $this->db = new PDO(
-            "mysql:host=$host;port=$port;dbname=$dbName",
-            "$username",
-            "$password"
-        );
+    public function __construct(string $dbName, string $port, string $host, string $username, string $password)
+    {
         $this->dbName = $dbName;
         $this->port = $port;
         $this->host = $host;
         $this->username = $username;
         $this->password = $password;
+        $this->db = new PDO(
+            "mysql:host=$this->host;port=$this->port;dbname=$this->dbName",
+            $this->username,
+            $this->password
+        );
     }
-    
-    
-    public function render(string $view, array $values) : void
-    {
-        
-        
-        require 'views/layout.phtml';
-    }
-    
 }
 
 
